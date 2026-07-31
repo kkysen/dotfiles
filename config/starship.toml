@@ -1,0 +1,22 @@
+add_newline = false
+
+format = """$directory$git_branch$git_status$cmd_duration$character"""
+
+[directory]
+style = "blue bold"
+truncation_length = 3
+
+[git_branch]
+symbol = ""
+style = "purple"
+
+[git_status]
+style = "red"
+
+[cmd_duration]
+min_time = 500
+format = "took [$duration]($style) "
+
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
