@@ -41,7 +41,15 @@ fi
 if ! is_command cargo-binstall; then
     cargo quickinstall cargo-binstall
 fi
-cargo binstall --no-confirm starship zoxide ripgrep fd-find git-delta gitui
+# crate:binary, since the crate and binary names differ
+# for ripgrep, fd-find, and git-delta.
+for pair in starship:starship zoxide:zoxide ripgrep:rg fd-find:fd git-delta:delta gitui:gitui; do
+    crate="${pair%%:*}"
+    bin="${pair##*:}"
+    if ! is_command "$bin"; then
+        cargo binstall --no-confirm "$crate"
+    fi
+done
 
 # fzf + gh, via brew
 for tool in fzf gh; do
