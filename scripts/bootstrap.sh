@@ -18,8 +18,13 @@ fi
 # so add it to `PATH` here too.
 export PATH="$HOME/.local/bin:$PATH"
 
-# uv, bun, claude, via mise (checksummed prebuilt binaries, not curl | sh)
-mise use -g uv bun claude
+# uv, bun, claude, starship, zoxide, ripgrep, fd, git-delta, and
+# gitui, via mise (checksummed prebuilt binaries, not curl | sh
+# or a cargo build).
+#
+# cargo-binstall is included too, kept installed for ad hoc
+# `cargo binstall <tool>` use later, for tools not in mise's registry.
+mise use -g uv bun claude starship zoxide ripgrep fd delta gitui cargo-binstall
 
 # rustup (cargo, rustc)
 if ! is_command cargo; then
@@ -33,23 +38,6 @@ if ! is_command brew; then
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# starship, zoxide, ripgrep, fd-find, git-delta, gitui, via cargo-binstall (prebuilt binaries, no compiling)
-if ! is_command cargo-quickinstall; then
-    cargo install cargo-quickinstall
-fi
-if ! is_command cargo-binstall; then
-    cargo quickinstall cargo-binstall
-fi
-# crate:binary, since the crate and binary names differ
-# for ripgrep, fd-find, and git-delta.
-for pair in starship:starship zoxide:zoxide ripgrep:rg fd-find:fd git-delta:delta gitui:gitui; do
-    crate="${pair%%:*}"
-    bin="${pair##*:}"
-    if ! is_command "$bin"; then
-        cargo binstall --no-confirm "$crate"
-    fi
-done
 
 # fzf + gh, via brew
 for tool in fzf gh; do
