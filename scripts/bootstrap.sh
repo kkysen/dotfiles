@@ -18,6 +18,9 @@ curl -fsSL https://sh.rustup.rs | sh -s -- -y
 curl -fsSL https://bun.sh/install | bash
 export PATH="$HOME/.bun/bin:$PATH"
 
+# Claude Code
+curl -fsSL https://claude.ai/install.sh | bash
+
 # Homebrew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
