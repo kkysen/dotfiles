@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -euxo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 ./scripts/bootstrap.sh
