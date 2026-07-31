@@ -41,32 +41,28 @@ fi
 PS1='\u@\h:\w\$ '
 
 # --- Tool hooks ---
-# Each is guarded so a missing tool never breaks the shell.
+# These assume scripts/bootstrap.sh has already installed everything.
+# A missing tool here is a hard error on purpose, not a silent skip.
 
 # mise (runtime version manager: node, npm, ...)
-command -v mise >/dev/null 2>&1 && eval "$(mise activate bash)"
+eval "$(mise activate bash)"
 
 # rustup / cargo
-[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-[ -d "$BUN_INSTALL/bin" ] && export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Homebrew (Linuxbrew on Linux, /opt/homebrew or /usr/local on macOS)
-for brew_bin in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
-    if [ -x "$brew_bin" ]; then
-        eval "$("$brew_bin" shellenv)"
-        break
-    fi
-done
-unset brew_bin
+# Homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # zoxide (smarter cd)
-command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init bash)"
+eval "$(zoxide init bash)"
 
 # fzf
-[ -f ~/.fzf.bash ] && . ~/.fzf.bash
+source "$(brew --prefix)/opt/fzf/shell/key-bindings.bash"
+source "$(brew --prefix)/opt/fzf/shell/completion.bash"
 
 # starship prompt (overrides the fallback PS1 above)
-command -v starship >/dev/null 2>&1 && eval "$(starship init bash)"
+eval "$(starship init bash)"
