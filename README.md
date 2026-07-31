@@ -13,8 +13,8 @@ cd ~/work/dotfiles
 This does two things:
 
 1. `scripts/bootstrap.sh` — installs the CLI tools
-   this config depends on: `mise`, `uv`, `rustup`, `bun`, Claude Code,
-   Homebrew, `starship`, `zoxide`, `fzf`, and `gh`.
+   this config depends on: `mise`, `uv`, `rustup`, `bun`, `claude`,
+   `brew`, `starship`, `zoxide`, `fzf`, and `gh`.
    Safe to rerun: it skips anything already installed.
 2. `scripts/link.sh` — symlinks the tracked files into `$HOME`,
    backing up anything already there
