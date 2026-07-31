@@ -4,33 +4,49 @@
 set -euxo pipefail
 
 # mise (runtime version manager: node, npm, ...)
-curl -fsSL https://mise.run | sh
+if ! command -v mise >/dev/null 2>&1; then
+    curl -fsSL https://mise.run | sh
+fi
 
 # uv (Python package/venv manager)
-curl -fsSL https://astral.sh/uv/install.sh | sh
+if ! command -v uv >/dev/null 2>&1; then
+    curl -fsSL https://astral.sh/uv/install.sh | sh
+fi
 
 # rustup (cargo, rustc)
-curl -fsSL https://sh.rustup.rs | sh -s -- -y
+if ! command -v cargo >/dev/null 2>&1; then
+    curl -fsSL https://sh.rustup.rs | sh -s -- -y
+fi
 # shellcheck source=/dev/null
 . "$HOME/.cargo/env"
 
 # bun
-curl -fsSL https://bun.sh/install | bash
+if ! command -v bun >/dev/null 2>&1; then
+    curl -fsSL https://bun.sh/install | bash
+fi
 export PATH="$HOME/.bun/bin:$PATH"
 
 # Claude Code
-curl -fsSL https://claude.ai/install.sh | bash
+if ! command -v claude >/dev/null 2>&1; then
+    curl -fsSL https://claude.ai/install.sh | bash
+fi
 
 # Homebrew
-NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v brew >/dev/null 2>&1; then
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # starship, zoxide, ripgrep, fd-find, via cargo-binstall (prebuilt binaries, no compiling)
-cargo install cargo-quickinstall
-cargo quickinstall cargo-binstall
+if ! command -v cargo-binstall >/dev/null 2>&1; then
+    cargo install cargo-quickinstall
+    cargo quickinstall cargo-binstall
+fi
 cargo binstall --no-confirm starship zoxide ripgrep fd-find
 
 # fzf + gh, via brew
 for tool in fzf gh; do
-    brew install "$tool"
+    if ! command -v "$tool" >/dev/null 2>&1; then
+        brew install "$tool"
+    fi
 done

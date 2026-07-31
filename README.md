@@ -12,10 +12,10 @@ cd ~/work/dotfiles
 
 This does two things:
 
-1. `scripts/bootstrap.sh` — unconditionally installs the CLI tools
+1. `scripts/bootstrap.sh` — installs the CLI tools
    this config depends on: `mise`, `uv`, `rustup`, `bun`, Claude Code,
-   Homebrew, `starship`, `zoxide`, `fzf`, and `gh`. It always installs;
-   it doesn't check whether a tool is already present.
+   Homebrew, `starship`, `zoxide`, `fzf`, and `gh`.
+   Safe to rerun: it skips anything already installed.
 2. `scripts/link.sh` — symlinks the tracked files into `$HOME`,
    backing up anything already there
    under `~/.dotfiles-backup/<timestamp>/`.
