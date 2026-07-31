@@ -11,6 +11,11 @@ is_command() {
 if ! is_command mise; then
     curl -fsSL https://mise.run | sh
 fi
+# On a fresh machine, `~/.local/bin` doesn't exist yet,
+# since it isn't in `/etc/skel`.
+# So `~/.profile`'s `PATH` addition for it never ran at login.
+# The line above just created the directory,
+# so add it to `PATH` here too.
 export PATH="$HOME/.local/bin:$PATH"
 
 # uv, bun, claude, via mise (checksummed prebuilt binaries, not curl | sh)
