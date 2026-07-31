@@ -22,10 +22,10 @@ export PATH="$HOME/.bun/bin:$PATH"
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# starship + zoxide, via cargo
-for tool in starship zoxide; do
-    cargo install "$tool"
-done
+# starship + zoxide, via cargo-binstall (prebuilt binaries, no compiling)
+cargo install cargo-quickinstall
+cargo quickinstall cargo-binstall
+cargo binstall --no-confirm starship zoxide
 
 # fzf + gh, via brew
 for tool in fzf gh; do
