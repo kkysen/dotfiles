@@ -45,6 +45,11 @@ fi
 # Fallback prompt, used if starship isn't installed
 PS1='\u@\h:\w\$ '
 
+# On WSL, open links in Chrome on the Windows side.
+if [ -n "${WSL_DISTRO_NAME:-}" ]; then
+    export BROWSER='cmd.exe /c start chrome'
+fi
+
 # --- Tool hooks ---
 # These assume scripts/bootstrap.sh has already installed everything.
 # A missing tool here is a hard error on purpose, not a silent skip.
