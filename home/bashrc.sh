@@ -8,8 +8,8 @@ esac
 
 # History
 HISTCONTROL=ignoreboth
-HISTSIZE=10000
-HISTFILESIZE=20000
+HISTSIZE=-1
+HISTFILESIZE=-1
 shopt -s histappend
 shopt -s checkwinsize
 
