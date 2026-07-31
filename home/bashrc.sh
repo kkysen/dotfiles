@@ -54,15 +54,11 @@ fi
 # These assume scripts/bootstrap.sh has already installed everything.
 # A missing tool here is a hard error on purpose, not a silent skip.
 
-# mise (runtime version manager: node, npm, ...)
+# mise (runtime version manager: node, npm, ...; also manages uv, bun, claude)
 eval "$(mise activate bash)"
 
 # rustup / cargo
 . "$HOME/.cargo/env"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
