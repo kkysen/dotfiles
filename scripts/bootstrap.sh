@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Installs the CLI tools this dotfiles setup depends on.
 set -euxo pipefail
 

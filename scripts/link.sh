@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Symlinks the tracked config files into $HOME, backing up anything already there.
 set -euxo pipefail
 
