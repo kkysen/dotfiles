@@ -38,8 +38,10 @@ fi
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # starship, zoxide, ripgrep, fd-find, git-delta, gitui, via cargo-binstall (prebuilt binaries, no compiling)
-if ! command -v cargo-binstall >/dev/null 2>&1; then
+if ! command -v cargo-quickinstall >/dev/null 2>&1; then
     cargo install cargo-quickinstall
+fi
+if ! command -v cargo-binstall >/dev/null 2>&1; then
     cargo quickinstall cargo-binstall
 fi
 cargo binstall --no-confirm starship zoxide ripgrep fd-find git-delta gitui
