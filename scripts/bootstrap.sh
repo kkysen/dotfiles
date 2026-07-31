@@ -18,13 +18,13 @@ fi
 # so add it to `PATH` here too.
 export PATH="$HOME/.local/bin:$PATH"
 
-# uv, bun, claude, starship, zoxide, ripgrep, fd, git-delta, and
-# gitui, via mise (checksummed prebuilt binaries, not curl | sh
+# uv, bun, claude, starship, zoxide, ripgrep, fd, git-delta, gitui,
+# fzf, and gh, via mise (checksummed prebuilt binaries, not curl | sh
 # or a cargo build).
 #
 # cargo-binstall is included too, kept installed for ad hoc
 # `cargo binstall <tool>` use later, for tools not in mise's registry.
-mise use -g uv bun claude starship zoxide ripgrep fd delta gitui cargo-binstall
+mise use -g uv bun claude starship zoxide ripgrep fd delta gitui cargo-binstall fzf gh
 
 # rustup (cargo, rustc)
 if ! is_command cargo; then
@@ -33,15 +33,9 @@ fi
 # shellcheck source=/dev/null
 . "$HOME/.cargo/env"
 
-# Homebrew
+# Homebrew, kept installed for ad hoc `brew install` use later,
+# since nothing here still depends on it directly.
 if ! is_command brew; then
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# fzf + gh, via brew
-for tool in fzf gh; do
-    if ! is_command "$tool"; then
-        brew install "$tool"
-    fi
-done

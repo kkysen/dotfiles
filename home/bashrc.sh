@@ -67,8 +67,7 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(zoxide init bash)"
 
 # fzf
-source "$(brew --prefix)/opt/fzf/shell/key-bindings.bash"
-source "$(brew --prefix)/opt/fzf/shell/completion.bash"
+eval "$(fzf --bash)"
 
 # starship prompt (overrides the fallback PS1 above)
 eval "$(starship init bash)"
