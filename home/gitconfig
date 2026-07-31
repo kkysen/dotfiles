@@ -12,7 +12,7 @@
 	autoSetupRemote = true
 
 [core]
-	editor = vim
+	editor = nano
 
 [credential "https://github.com"]
 	helper =
