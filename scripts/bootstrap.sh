@@ -18,13 +18,23 @@ fi
 # so add it to `PATH` here too.
 export PATH="$HOME/.local/bin:$PATH"
 
-# uv, bun, claude, starship, zoxide, ripgrep, fd, git-delta, gitui,
-# fzf, and gh, via mise (checksummed prebuilt binaries, not curl | sh
-# or a cargo build).
-#
-# cargo-binstall is included too, kept installed for ad hoc
-# `cargo binstall <tool>` use later, for tools not in mise's registry.
-mise use -g uv bun claude starship zoxide ripgrep fd delta gitui cargo-binstall fzf gh
+# Install via `mise`.
+# These are checksummed prebuilt binaries, not the more dangerous `curl | sh`.
+mise_packages=(
+    uv
+    bun
+    claude
+    starship
+    zoxide
+    ripgrep
+    fd
+    delta
+    gitui
+    cargo-binstall
+    fzf
+    gh
+)
+mise use -g "${mise_packages[@]}"
 
 # rustup (cargo, rustc)
 if ! is_command cargo; then
@@ -33,9 +43,26 @@ fi
 # shellcheck source=/dev/null
 . "$HOME/.cargo/env"
 
-# Homebrew, kept installed for ad hoc `brew install` use later,
-# since nothing here still depends on it directly.
+# Install via `cargo binstall`, for tools not in `mise`'s registry.
+cargo_packages=(
+)
+for package in "${cargo_packages[@]}"; do
+    if ! is_command "$package"; then
+        cargo binstall --no-confirm "$package"
+    fi
+done
+
+# Homebrew.
 if ! is_command brew; then
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Install via `brew`, for tools not in `mise`'s registry.
+brew_packages=(
+)
+for package in "${brew_packages[@]}"; do
+    if ! is_command "$package"; then
+        brew install "$package"
+    fi
+done
