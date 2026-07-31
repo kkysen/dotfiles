@@ -11,6 +11,10 @@
 [push]
 	autoSetupRemote = true
 
+[alias]
+	st = status
+	cp = cherry-pick
+
 [core]
 	editor = nano
 	pager = delta
