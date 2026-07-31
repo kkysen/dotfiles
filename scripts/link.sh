@@ -12,9 +12,13 @@ link() {
     if [ -L "$dest" ]; then
         rm "$dest"
     elif [ -e "$dest" ]; then
-        mkdir -p "$(dirname "$BACKUP_DIR/$2")"
-        mv "$dest" "$BACKUP_DIR/$2"
-        echo "Backed up $dest -> $BACKUP_DIR/$2"
+        if cmp -s "$dest" "$src"; then
+            rm "$dest"
+        else
+            mkdir -p "$(dirname "$BACKUP_DIR/$2")"
+            mv "$dest" "$BACKUP_DIR/$2"
+            echo "Backed up $dest -> $BACKUP_DIR/$2"
+        fi
     fi
     ln -s "$src" "$dest"
     echo "Linked $dest -> $src"
