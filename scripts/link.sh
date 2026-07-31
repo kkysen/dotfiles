@@ -21,7 +21,6 @@ link() {
 }
 
 link home/bashrc.sh .bashrc
-link home/bash_aliases.sh .bash_aliases
 link home/gitconfig .gitconfig
 link config/claude/settings.json .claude/settings.json
 

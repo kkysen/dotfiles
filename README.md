@@ -24,6 +24,6 @@ Then restart your shell (`exec bash`).
 
 ## Layout
 
-- `home/` — files that map 1:1 onto `$HOME` (`.bashrc`, `.bash_aliases`, `.gitconfig`)
+- `home/` — files that map 1:1 onto `$HOME` (`.bashrc`, `.gitconfig`)
 - `config/` — files that map onto XDG-style config dirs (e.g. `~/.claude/settings.json`)
 - `scripts/` — bootstrap and linking logic
