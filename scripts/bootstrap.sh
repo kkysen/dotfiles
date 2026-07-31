@@ -37,12 +37,12 @@ if ! command -v brew >/dev/null 2>&1; then
 fi
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# starship, zoxide, ripgrep, fd-find, git-delta, via cargo-binstall (prebuilt binaries, no compiling)
+# starship, zoxide, ripgrep, fd-find, git-delta, gitui, via cargo-binstall (prebuilt binaries, no compiling)
 if ! command -v cargo-binstall >/dev/null 2>&1; then
     cargo install cargo-quickinstall
     cargo quickinstall cargo-binstall
 fi
-cargo binstall --no-confirm starship zoxide ripgrep fd-find git-delta
+cargo binstall --no-confirm starship zoxide ripgrep fd-find git-delta gitui
 
 # fzf + gh, via brew
 for tool in fzf gh; do
