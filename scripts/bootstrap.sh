@@ -7,7 +7,7 @@ is_command() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# mise (runtime version manager: node, npm, ...)
+# `mise` (runtime version manager: `node`, `npm`, ...)
 if ! is_command mise; then
     curl -fsSL https://mise.run | sh
 fi
@@ -36,7 +36,7 @@ mise_packages=(
 )
 mise use -g "${mise_packages[@]}"
 
-# rustup (cargo, rustc)
+# `rustup` (`cargo`, `rustc`)
 if ! is_command cargo; then
     curl -fsSL https://sh.rustup.rs | sh -s -- -y
 fi

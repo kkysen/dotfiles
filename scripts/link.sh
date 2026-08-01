@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Symlinks the tracked config files into $HOME, backing up anything already there.
+# Symlinks the tracked config files into `$HOME`, backing up anything already there.
 set -euxo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
