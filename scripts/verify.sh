@@ -28,13 +28,21 @@ commands=(
 missing=0
 
 check() {
-    local flag="$1" label="$2" cmd
-    for cmd in "${commands[@]}"; do
-        if ! env -i HOME="$HOME" TERM="${TERM:-dumb}" bash "$flag" "command -v $cmd" >/dev/null 2>&1; then
+    local flag="$1"
+    local label="$2"
+    local cmd
+    local not_found
+    not_found="$(env -i HOME="$HOME" TERM="${TERM:-dumb}" bash "$flag" '
+        for cmd in "$@"; do
+            command -v "$cmd" >/dev/null 2>&1 || echo "$cmd"
+        done
+    ' bash "${commands[@]}" 2>/dev/null)"
+    if [ -n "$not_found" ]; then
+        while IFS= read -r cmd; do
             echo "missing in $label: $cmd" >&2
-            missing=1
-        fi
-    done
+        done <<<"$not_found"
+        missing=1
+    fi
 }
 
 check -lc "login shell"

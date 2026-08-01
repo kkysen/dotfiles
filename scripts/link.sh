@@ -7,7 +7,8 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 link() {
-    local src="$DOTFILES_DIR/$1" dest="$HOME/$2"
+    local src="$DOTFILES_DIR/$1"
+    local dest="$HOME/$2"
     mkdir -p "$(dirname "$dest")"
     if [ -L "$dest" ]; then
         rm "$dest"
