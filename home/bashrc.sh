@@ -54,14 +54,13 @@ fi
 # These assume `scripts/bootstrap.sh` has already installed everything.
 # A missing tool here is a hard error on purpose, not a silent skip.
 
+# `~/.profile` sources `~/.path.sh` before sourcing this file,
+# but non-login shells (e.g. a new terminal tab, `tmux`) skip `~/.profile` entirely
+# and source this file directly, so re-source it here too. `mise` below needs it on `$PATH`.
+. "$HOME/.path.sh"
+
 # `mise` (runtime version manager: `node`, `npm`, ...; also manages `uv`, `bun`, `claude`)
 eval "$(mise activate bash)"
-
-# `rustup` / `cargo`
-. "$HOME/.cargo/env"
-
-# Homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # `zoxide` (smarter `cd`)
 eval "$(zoxide init bash)"

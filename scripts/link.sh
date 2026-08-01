@@ -24,6 +24,8 @@ link() {
     echo "Linked $dest -> $src"
 }
 
+link home/path.sh .path.sh
+link home/profile.sh .profile
 link home/bashrc.sh .bashrc
 link home/gitconfig .gitconfig
 link config/claude/settings.json .claude/settings.json
