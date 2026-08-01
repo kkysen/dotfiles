@@ -14,13 +14,21 @@ echo_and_run() {
 link() {
     local src="$DOTFILES_DIR/$1"
     local dest="$HOME/$2"
+    if [ "$dest" -ef "$src" ]; then
+        # Do nothing if they're the same file already (resolving to the same thing).
+        return
+    fi
     mkdir -p "$(dirname "$dest")"
     if [ -L "$dest" ]; then
+        # Remove any symlink since it's not the same file.
         echo_and_run rm "$dest"
     elif [ -e "$dest" ]; then
         if cmp -s "$dest" "$src"; then
+            # If it exists with the same content, just remove it.
+            # But re-link so that it's the same file, not just the same content.
             echo_and_run rm "$dest"
         else
+            # If it exists with a different content, back it up.
             mkdir -p "$(dirname "$BACKUP_DIR/$2")"
             echo_and_run mv "$dest" "$BACKUP_DIR/$2"
         fi
