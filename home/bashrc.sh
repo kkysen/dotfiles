@@ -77,3 +77,15 @@ eval "$(starship init bash)"
 # `--disable-ai` so that typing `?` doesn't launch AI
 # while I'm trying to type something else.
 eval "$(atuin init bash --disable-up-arrow --disable-ai)"
+
+# Completions
+eval "$(bat --completion bash)"
+eval "$(rustup completions bash cargo)"
+eval "$(delta --generate-completion bash)"
+eval "$(dua completions bash)"
+eval "$(gh completion -s bash)"
+eval "$(just --completions bash)"
+eval "$(procs --gen-completion-out bash)"
+eval "$(rg --generate complete-bash)"
+eval "$(rustup completions bash)"
+eval "$(uv generate-shell-completion bash)"
