@@ -10,11 +10,14 @@ if [ "${BASH_SOURCE[0]}" = "$0" ]; then
 fi
 
 if ! (
-    set -euxo pipefail
+    set -euo pipefail
     cd "$(dirname "${BASH_SOURCE[0]}")"
+    
+    set -x
     ./scripts/bootstrap.sh
     ./scripts/link.sh
     ./scripts/verify.sh
+    set +x
 ); then
     return 1
 fi
