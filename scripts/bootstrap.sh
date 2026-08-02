@@ -24,16 +24,23 @@ export PATH="$HOME/.local/bin:$PATH"
 # These are checksummed prebuilt binaries, not the more dangerous `curl | sh`.
 mise_packages=(
     atuin
+    bat
     bun
     cargo-binstall
     claude
     delta
+    dua
     fd
     fzf
     gh
     gitui
+    just
+    lsd
     ripgrep
+    sccache
+    sd
     starship
+    tokei
     uv
     zoxide
 )
@@ -54,6 +61,9 @@ set +x
 
 # Install via `cargo binstall`, for tools not in `mise`'s registry.
 cargo_packages=(
+    exa
+    procs
+    ruplacer
 )
 for package in "${cargo_packages[@]}"; do
     if ! is_command "$package"; then

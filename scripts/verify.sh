@@ -8,21 +8,31 @@ set -euo pipefail
 
 commands=(
     atuin
+    bat
     brew
     bun
     cargo
     cargo-binstall
     claude
     delta
+    dua
+    exa
     fd
     fzf
     gh
     gitui
+    just
+    lsd
     mise
+    procs
     rg
+    ruplacer
     rustc
     rustup
+    sccache
+    sd
     starship
+    tokei
     uv
     zoxide
 )
