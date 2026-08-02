@@ -5,12 +5,15 @@ Personal shell and tool configuration, kept in sync across machines.
 ## Fresh machine setup
 
 ```sh
-git clone https://github.com/kkysen/dotfiles.git ~/work/dotfiles
-cd ~/work/dotfiles
-./install.sh
+git clone https://github.com/kkysen/dotfiles.git
+. ./dotfiles/install.sh
 ```
 
-This does two things:
+`install.sh` must be sourced (`. install.sh`), not executed (`./install.sh`),
+so it can `. ~/.bashrc` in your current shell at the end
+instead of telling you to open a new one.
+
+This does three things:
 
 1. `scripts/bootstrap.sh` — installs the CLI tools
    this config depends on: `mise`, `uv`, `rustup`, `bun`, `claude`,
@@ -19,8 +22,8 @@ This does two things:
 2. `scripts/link.sh` — symlinks the tracked files into `$HOME`,
    backing up anything already there
    under `~/.dotfiles-backup/<timestamp>/`.
-
-Then restart your shell (`exec bash`).
+3. `scripts/verify.sh` — checks every installed tool is actually on `$PATH`,
+   in both a login shell and a non-login interactive shell.
 
 ## Layout
 
