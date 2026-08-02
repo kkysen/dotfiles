@@ -40,13 +40,12 @@ set -x
 mise use -g "${mise_packages[@]}"
 set +x
 
-# `rustup` (`cargo`, `rustc`)
-if ! is_command cargo; then
+# Install Rust (`rustup`, `cargo`, `rustc`).
+if ! is_command rustup; then
     set -x
     curl -fsSL https://sh.rustup.rs | sh -s -- -y
     set +x
 fi
-
 set -x
 # shellcheck source=/dev/null
 . "$HOME/.cargo/env"
@@ -69,7 +68,6 @@ if ! is_command brew; then
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     set +x
 fi
-
 set -x
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 set +x

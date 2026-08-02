@@ -20,6 +20,7 @@ commands=(
     mise
     rg
     rustc
+    rustup
     starship
     uv
     zoxide
