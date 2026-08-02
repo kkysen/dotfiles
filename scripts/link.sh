@@ -41,6 +41,7 @@ link home/profile.sh .profile
 link home/bashrc.sh .bashrc
 link home/gitconfig .gitconfig
 link config/claude/settings.json .claude/settings.json
+link config/claude/CLAUDE.md .claude/CLAUDE.md
 link config/starship.toml .config/starship.toml
 link config/atuin/config.toml .config/atuin/config.toml
 
