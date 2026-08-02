@@ -59,7 +59,7 @@ fi
 # and source this file directly, so re-source it here too. `mise` below needs it on `$PATH`.
 . "$HOME/.path.sh"
 
-# `mise` (runtime version manager: `node`, `npm`, ...; also manages `uv`, `bun`, `claude`)
+# `mise` (runtime version manager: `node`, `npm`, ...; also manages `uv`, `bun`, `claude`).
 eval "$(mise activate bash)"
 
 # `zoxide` (smarter `cd`)
