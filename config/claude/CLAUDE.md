@@ -28,6 +28,12 @@ A single-quoted heredoc delimiter (`<<'EOF'`) disables all shell interpretation
 inside it, backticks included, so `` \` `` comes through literally in the commit
 message instead of `` ` ``. Write plain `` ` `` there, exactly as it should appear.
 
+Made this exact mistake three times in one session, twice after already adding
+the paragraph above, so the prose reminder alone isn't enough: before running
+the `git commit`/`git commit --amend` tool call, scan the literal message text
+being passed for the two-character sequence backslash-backtick and remove every
+occurrence, as a mechanical check, not just a mental note while composing.
+
 ## Code style
 
 Never use em dashes in code: this includes comments, string literals,
