@@ -22,6 +22,12 @@ including right after drafting one correctly moments earlier for a different mes
 Before running `git commit`, re-read the exact message being passed and check it
 against both rules above, as its own step, not just when writing prose elsewhere.
 
+When writing a commit message with `git commit -m "$(cat <<'EOF' ... EOF)"`,
+never escape backticks as `` \` `` inside the heredoc body.
+A single-quoted heredoc delimiter (`<<'EOF'`) disables all shell interpretation
+inside it, backticks included, so `` \` `` comes through literally in the commit
+message instead of `` ` ``. Write plain `` ` `` there, exactly as it should appear.
+
 ## Code style
 
 Never use em dashes in code: this includes comments, string literals,
