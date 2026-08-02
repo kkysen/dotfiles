@@ -23,18 +23,18 @@ export PATH="$HOME/.local/bin:$PATH"
 # Install via `mise`.
 # These are checksummed prebuilt binaries, not the more dangerous `curl | sh`.
 mise_packages=(
-    uv
     bun
-    claude
-    starship
-    zoxide
-    ripgrep
-    fd
-    delta
-    gitui
     cargo-binstall
+    claude
+    delta
+    fd
     fzf
     gh
+    gitui
+    ripgrep
+    starship
+    uv
+    zoxide
 )
 set -x
 mise use -g "${mise_packages[@]}"

@@ -7,22 +7,22 @@
 set -euo pipefail
 
 commands=(
-    mise
-    cargo
-    rustc
     brew
-    uv
     bun
-    claude
-    starship
-    zoxide
-    rg
-    fd
-    delta
-    gitui
+    cargo
     cargo-binstall
+    claude
+    delta
+    fd
     fzf
     gh
+    gitui
+    mise
+    rg
+    rustc
+    starship
+    uv
+    zoxide
 )
 
 missing=0
