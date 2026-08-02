@@ -56,7 +56,7 @@ if ! is_command rustup; then
 fi
 set -x
 # shellcheck source=/dev/null
-. "$HOME/.cargo/env"
+. ~/.cargo/env
 set +x
 
 # Install via `cargo binstall`, for tools not in `mise`'s registry.
