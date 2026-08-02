@@ -83,3 +83,13 @@ for package in "${brew_packages[@]}"; do
         set +x
     fi
 done
+
+# `atuin`
+set -x
+atuin login --username khyber
+atuin import auto
+# These hooks atomically edit files that are symlinked, thus breaking the symlinks.
+# But if ran as part of `. install.sh`, then `link.sh` should re-fix them.
+atuin hook install claude-code
+atuin hook install codex
+set +x

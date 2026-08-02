@@ -72,4 +72,8 @@ eval "$(fzf --bash)"
 eval "$(starship init bash)"
 
 # `atuin` (shell history search/sync)
-eval "$(atuin init bash)"
+# `--disable-up-arrow` because Ctrl + R already does the same,
+# and overriding the up arrow gets in the way of a lot of quick uses.
+# `--disable-ai` so that typing `?` doesn't launch AI
+# while I'm trying to type something else.
+eval "$(atuin init bash --disable-up-arrow --disable-ai)"
