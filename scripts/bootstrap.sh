@@ -94,6 +94,13 @@ for package in "${brew_packages[@]}"; do
     fi
 done
 
+# `gh`
+if ! gh auth status >/dev/null 2>&1; then
+    set -x
+    gh auth login
+    set +x
+fi
+
 # `atuin`
 set -x
 atuin login --username khyber
