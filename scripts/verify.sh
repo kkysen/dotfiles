@@ -7,6 +7,7 @@
 set -euo pipefail
 
 commands=(
+    atuin
     brew
     bun
     cargo

@@ -70,3 +70,6 @@ eval "$(fzf --bash)"
 
 # `starship` prompt (overrides the fallback `PS1` above)
 eval "$(starship init bash)"
+
+# `atuin` (shell history search/sync)
+eval "$(atuin init bash)"

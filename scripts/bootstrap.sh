@@ -23,6 +23,7 @@ export PATH="$HOME/.local/bin:$PATH"
 # Install via `mise`.
 # These are checksummed prebuilt binaries, not the more dangerous `curl | sh`.
 mise_packages=(
+    atuin
     bun
     cargo-binstall
     claude
