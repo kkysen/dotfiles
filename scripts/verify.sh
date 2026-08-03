@@ -43,6 +43,7 @@ commands=(
     tree
     unzip
     uv
+    zig
     zoxide
 )
 

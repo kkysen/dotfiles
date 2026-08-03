@@ -64,6 +64,7 @@ mise_packages=(
     starship
     tokei
     uv
+    zig
     zoxide
 )
 set -x
