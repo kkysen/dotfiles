@@ -48,6 +48,7 @@ mise_packages=(
     bat
     bun
     cargo-binstall
+    ccache
     claude
     delta
     dua

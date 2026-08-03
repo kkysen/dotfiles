@@ -13,6 +13,7 @@ commands=(
     bun
     cargo
     cargo-binstall
+    ccache
     claude
     delta
     dua
