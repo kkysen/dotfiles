@@ -22,17 +22,21 @@ including right after drafting one correctly moments earlier for a different mes
 Before running `git commit`, re-read the exact message being passed and check it
 against both rules above, as its own step, not just when writing prose elsewhere.
 
-When writing a commit message with `git commit -m "$(cat <<'EOF' ... EOF)"`,
-never escape backticks as `` \` `` inside the heredoc body.
-A single-quoted heredoc delimiter (`<<'EOF'`) disables all shell interpretation
-inside it, backticks included, so `` \` `` comes through literally in the commit
-message instead of `` ` ``. Write plain `` ` `` there, exactly as it should appear.
+Never write a commit message inline on the command line
+(`git commit -m "..."` or `git commit -m "$(cat <<'EOF' ... EOF)"`),
+even correctly quoted. Composing it as a shell argument
+is what causes the backtick-escaping mistake in the first place:
+writing `` \` `` is correct in some shell-quoting contexts
+(e.g. inside a double-quoted `-m "..."`) and wrong in others
+(inside a single-quoted heredoc, where nothing is interpreted so `` \` `` comes through literally).
+The two look nearly identical at the point of typing, which is exactly how this keeps happening.
 
-Made this exact mistake three times in one session, twice after already adding
-the paragraph above, so the prose reminder alone isn't enough: before running
-the `git commit`/`git commit --amend` tool call, scan the literal message text
-being passed for the two-character sequence backslash-backtick and remove every
-occurrence, as a mechanical check, not just a mental note while composing.
+Instead, write the message with the `Write` tool to a scratch file
+(e.g. `$TMPDIR/commit-msg.txt`), exactly as it should read, no shell
+escaping of any kind since `Write` isn't a shell context at all,
+then run `git commit -F <path>` (or `--amend -F <path>`).
+This isn't just "be more careful": it removes the shell-quoting step
+that caused the mistake, six times in one session, entirely.
 
 ## Code style
 
