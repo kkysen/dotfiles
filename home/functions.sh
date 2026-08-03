@@ -7,7 +7,7 @@
 # if exported explicitly.
 
 rc() {
-    . ~/.bashc
+    . ~/.bashrc
 }
 
 export -f rc
