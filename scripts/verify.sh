@@ -6,6 +6,11 @@
 # each simulated from a clean environment.
 set -euo pipefail
 
+# `apt.llvm.org` packages are all suffixed with the same dev-branch major
+# version `scripts/bootstrap.sh` resolves dynamically, so resolve it the
+# same way here, rather than hardcoding one that'll go stale.
+llvm_version="$(apt-cache search '^clang-[0-9]+$' | sed -E 's/^clang-([0-9]+).*/\1/' | sort -n | tail -1)"
+
 commands=(
     atuin
     bat
@@ -14,6 +19,11 @@ commands=(
     cargo
     cargo-binstall
     ccache
+    "clang++-$llvm_version"
+    "clang-$llvm_version"
+    "clang-check-$llvm_version"
+    "clang-format-$llvm_version"
+    "clang-tidy-$llvm_version"
     claude
     delta
     dua
@@ -25,6 +35,9 @@ commands=(
     gh
     gitui
     just
+    "lld-$llvm_version"
+    "lldb-$llvm_version"
+    "llvm-config-$llvm_version"
     lsd
     make
     mise

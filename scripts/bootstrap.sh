@@ -11,10 +11,33 @@ is_apt_package_installed() {
     dpkg -s "$1" >/dev/null 2>&1
 }
 
+# LLVM/Clang dev-branch builds from https://apt.llvm.org/,
+# since Ubuntu's own repo only carries the last two stable LLVM branches, not the dev branch.
+llvm_apt_list=/etc/apt/sources.list.d/apt.llvm.org.list
+if [ ! -f "$llvm_apt_list" ]; then
+    set -x
+    wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+    echo "deb http://apt.llvm.org/$(lsb_release -cs)/ llvm-toolchain-$(lsb_release -cs) main" |
+        sudo tee "$llvm_apt_list"
+    sudo apt update
+    set +x
+fi
+# `apt.llvm.org` only ever publishes major-version-suffixed packages
+# (`clang-23`, not `clang`), so find whichever major version is newest,
+# rather than hardcoding one that'll go stale as the dev branch advances.
+llvm_version="$(apt-cache search '^clang-[0-9]+$' | sed -E 's/^clang-([0-9]+).*/\1/' | sort -n | tail -1)"
+
 # Install via `apt`, for system packages not available via `mise`/`cargo`/`brew`.
 # One package per line, for single-line diffs when adding one.
 apt_packages=(
     build-essential
+    "clang-$llvm_version"
+    "clang-format-$llvm_version"
+    "clang-tidy-$llvm_version"
+    "clang-tools-$llvm_version"
+    "lld-$llvm_version"
+    "lldb-$llvm_version"
+    "llvm-$llvm_version"
     poppler-utils
     socat # for `claude`'s sandbox
     tree
