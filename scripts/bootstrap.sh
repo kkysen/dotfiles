@@ -66,6 +66,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Install via `mise`.
 # These are checksummed prebuilt binaries, not the more dangerous `curl | sh`.
+# Entries not in `mise`'s registry use its generic `github` backend instead
+# (`github:owner/repo`, the same way `ccache` above is `github:ccache/ccache`).
 mise_packages=(
     atuin
     bat
@@ -78,6 +80,12 @@ mise_packages=(
     fd
     fzf
     gh
+    github:dalance/procs # crates.io: `procs`
+    github:ogham/exa # crates.io: `exa`
+    # GitHub repo moved to `wild-linker/wild`; crates.io's `wild` is an
+    # unrelated, older, non-binary crate (the actual crate is `wild-linker`).
+    github:wild-linker/wild
+    github:your-tools/ruplacer # crates.io: `ruplacer`
     gitui
     just
     lsd
@@ -90,12 +98,6 @@ mise_packages=(
     uv
     zig
     zoxide
-    # `wild` isn't a `mise` registry alias, but its generic `github` backend
-    # works ad hoc for any repo with releases, the same way `ccache` uses
-    # `github:ccache/ccache` above. The GitHub repo moved to
-    # `wild-linker/wild`; crates.io's `wild` is an unrelated, older,
-    # non-binary crate (the actual crate is `wild-linker`).
-    github:wild-linker/wild
 )
 set -x
 mise use -g "${mise_packages[@]}"
@@ -117,13 +119,11 @@ set -x
 . ~/.cargo/env
 set +x
 
-# Install via `cargo binstall`, for tools not in `mise`'s registry.
+# Install via `cargo binstall`, for tools not in `mise`'s registry and not
+# on GitHub releases (`mise`'s generic `github` backend handles those).
 # `package` or `package:binary`, for when the installed binary's name
 # differs from the crate name (e.g. `some-crate:some-binary`).
 cargo_packages=(
-    exa
-    procs
-    ruplacer
 )
 for entry in "${cargo_packages[@]}"; do
     package="${entry%%:*}"
