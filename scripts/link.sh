@@ -37,6 +37,7 @@ link() {
 }
 
 link home/path.sh .path.sh
+link home/functions.sh .functions.sh
 link home/profile.sh .profile
 link home/bashrc.sh .bashrc
 link home/gitconfig .gitconfig
