@@ -19,11 +19,16 @@ commands=(
     exa
     fd
     fzf
+    g++
+    gcc
     gh
     gitui
     just
     lsd
+    make
     mise
+    pdfimages
+    pdftotext
     procs
     rg
     ruplacer
@@ -31,8 +36,11 @@ commands=(
     rustup
     sccache
     sd
+    socat
     starship
     tokei
+    tree
+    unzip
     uv
     zoxide
 )

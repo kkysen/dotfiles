@@ -7,6 +7,27 @@ is_command() {
     command -v "$1" >/dev/null 2>&1
 }
 
+is_apt_package_installed() {
+    dpkg -s "$1" >/dev/null 2>&1
+}
+
+# Install via `apt`, for system packages not available via `mise`/`cargo`/`brew`.
+# One package per line, for single-line diffs when adding one.
+apt_packages=(
+    build-essential
+    poppler-utils
+    socat # for `claude`'s sandbox
+    tree
+    unzip
+)
+for package in "${apt_packages[@]}"; do
+    if ! is_apt_package_installed "$package"; then
+        set -x
+        sudo apt install -y "$package"
+        set +x
+    fi
+done
+
 # `mise` (runtime version manager: `node`, `npm`, ...)
 if ! is_command mise; then
     set -x
