@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 
 # Verifies every tool `scripts/bootstrap.sh` installs is actually on `$PATH`,
-# in both a login shell (`~/.profile` -> `~/.bashrc`)
-# and a non-login interactive shell (`~/.bashrc` sourced directly, skipping `~/.profile`),
-# each simulated from a clean environment.
+# in login and non-login interactive shells (`~/.profile` -> `~/.bashrc`,
+# and `~/.bashrc` sourced directly, skipping `~/.profile`), plus a login
+# non-interactive shell, each simulated from a clean environment.
+#
+# The fourth combination, non-login non-interactive (plain `bash -c`,
+# e.g. cron, `ssh host cmd`), is intentionally not checked: it sources
+# neither `~/.profile` nor `~/.bashrc` at all, by design, so nothing
+# installed by `mise`/`cargo`/`rustup`/Homebrew is ever reachable there
+# regardless of what this script installs. Only `$BASH_ENV` could change
+# that, and that has its own tradeoffs on every non-interactive invocation,
+# not something to take on just to make this combination pass.
 set -euo pipefail
 
 # `apt.llvm.org` packages are all suffixed with the same dev-branch major
@@ -88,7 +96,8 @@ check() {
     fi
 }
 
-check -lc "login shell"
+check -lc "login non-interactive shell"
+check -lic "login interactive shell"
 check -ic "non-login interactive shell"
 
 if [ "$missing" -ne 0 ]; then
@@ -96,4 +105,4 @@ if [ "$missing" -ne 0 ]; then
     exit 1
 fi
 
-echo "All commands found in both login and non-login interactive shells."
+echo "All commands found in every checked shell."
