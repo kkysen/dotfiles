@@ -101,6 +101,11 @@ set -x
 mise use -g "${mise_packages[@]}"
 set +x
 
+# Latest Python, via `uv` (not `mise`, which only manages `uv` itself here).
+set -x
+uv python install --default --upgrade
+set +x
+
 # Install Rust (`rustup`, `cargo`, `rustc`).
 if ! is_command rustup; then
     set -x

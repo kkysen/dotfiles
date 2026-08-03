@@ -45,6 +45,8 @@ commands=(
     pdfimages
     pdftotext
     procs
+    python
+    python3
     rg
     ruplacer
     rustc
