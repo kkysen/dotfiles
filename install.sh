@@ -9,16 +9,22 @@ if [ "${BASH_SOURCE[0]}" = "$0" ]; then
     return 1 2>/dev/null || exit 1
 fi
 
-if ! (
+# A subshell tested directly by `if !`/`||` suspends `set -e` for its whole
+# body, no matter what's set inside it, so a failing `bootstrap.sh` wouldn't
+# stop this from continuing to `link.sh`/`verify.sh` anyway. Run it
+# untested, capture its real exit status, then check that separately.
+(
     set -euo pipefail
     cd "$(dirname "${BASH_SOURCE[0]}")"
-    
+
     set -x
     ./scripts/bootstrap.sh
     ./scripts/link.sh
     ./scripts/verify.sh
     set +x
-); then
+)
+status=$?
+if [ "$status" -ne 0 ]; then
     return 1
 fi
 
