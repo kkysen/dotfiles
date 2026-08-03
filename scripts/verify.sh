@@ -41,6 +41,7 @@ commands=(
     lsd
     make
     mise
+    mold
     pdfimages
     pdftotext
     procs
@@ -56,6 +57,7 @@ commands=(
     tree
     unzip
     uv
+    wild
     zig
     zoxide
 )
