@@ -3,7 +3,7 @@
 
 add_newline = false
 
-format = """$directory$git_branch$git_status$cmd_duration$character"""
+format = """$time$directory$git_branch$git_status$cmd_duration$memory_usage$character"""
 
 [directory]
 style = "blue bold"
@@ -17,8 +17,22 @@ style = "purple"
 style = "red"
 
 [cmd_duration]
-min_time = 500
+min_time = 0
+show_milliseconds = true
 format = "took [$duration]($style) "
+
+[memory_usage]
+disabled = false
+threshold = -1
+symbol = "🐏"
+style = "yellow bold"
+format = "[$symbol$ram]($style) "
+
+[time]
+disabled = false
+style = "cyan bold"
+format = "[$time]($style) "
+time_format = "%I:%M:%S %p"
 
 [character]
 success_symbol = "[❯](green)"
