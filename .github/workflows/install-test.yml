@@ -1,27 +1,18 @@
 name: Install test
 
+# No path filtering yet: this is the initial version, so run on every
+# change until it's proven reliable, rather than risk silently skipping
+# a change that should have been tested.
 on:
   push:
     branches: [main]
-    paths:
-      - install.sh
-      - scripts/**
-      - home/**
-      - config/**
-      - .github/workflows/install-test.yml
   pull_request:
-    paths:
-      - install.sh
-      - scripts/**
-      - home/**
-      - config/**
-      - .github/workflows/install-test.yml
   workflow_dispatch:
 
 jobs:
   install:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
