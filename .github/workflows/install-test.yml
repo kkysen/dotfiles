@@ -1,0 +1,31 @@
+name: Install test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - install.sh
+      - scripts/**
+      - home/**
+      - config/**
+      - .github/workflows/install-test.yml
+  pull_request:
+    paths:
+      - install.sh
+      - scripts/**
+      - home/**
+      - config/**
+      - .github/workflows/install-test.yml
+  workflow_dispatch:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      # `install.sh` refuses to run unless sourced, so this must stay `. ./install.sh`,
+      # not `./install.sh` or `bash install.sh`.
+      - name: Run install.sh
+        run: . ./install.sh

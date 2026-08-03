@@ -157,19 +157,24 @@ for package in "${brew_packages[@]}"; do
     fi
 done
 
-# `gh`
-if ! gh auth status >/dev/null 2>&1; then
+# `gh` and `atuin` need interactive login, which would hang CI forever.
+# GitHub Actions (and most other CI providers) set `$CI`, so skip both there;
+# the tools themselves are still installed above via `mise_packages`.
+if [ -z "${CI:-}" ]; then
+    # `gh`
+    if ! gh auth status >/dev/null 2>&1; then
+        set -x
+        gh auth login
+        set +x
+    fi
+
+    # `atuin`
     set -x
-    gh auth login
+    atuin login --username khyber
+    atuin import auto
+    # These hooks atomically edit files that are symlinked, thus breaking the symlinks.
+    # But if ran as part of `. install.sh`, then `link.sh` should re-fix them.
+    atuin hook install claude-code
+    atuin hook install codex
     set +x
 fi
-
-# `atuin`
-set -x
-atuin login --username khyber
-atuin import auto
-# These hooks atomically edit files that are symlinked, thus breaking the symlinks.
-# But if ran as part of `. install.sh`, then `link.sh` should re-fix them.
-atuin hook install claude-code
-atuin hook install codex
-set +x
