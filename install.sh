@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-# Sourced (`. install.sh`), not executed, so it can `. ~/.bashrc`
+# Sourced (`. ./install.sh`), not executed, so it can `. ~/.bashrc`
 # in your current shell afterward instead of telling you to open a new one.
+# Always include the `./`: a bare `. install.sh` makes `source` search `$PATH`
+# first, and a `mise` shim named `install.sh` can shadow the real one.
 
 if [ "${BASH_SOURCE[0]}" = "$0" ]; then
-    echo "Run this with '. install.sh', not './install.sh'," >&2
+    echo "Run this with '. ./install.sh', not './install.sh'," >&2
     echo "so it can update your current shell instead of a subprocess's." >&2
     return 1 2>/dev/null || exit 1
 fi

@@ -9,9 +9,12 @@ git clone https://github.com/kkysen/dotfiles.git
 . ./dotfiles/install.sh
 ```
 
-`install.sh` must be sourced (`. install.sh`), not executed (`./install.sh`),
+`install.sh` must be sourced (`. ./install.sh`), not executed (`./install.sh`),
 so it can `. ~/.bashrc` in your current shell at the end
 instead of telling you to open a new one.
+Always include the `./`: a bare `. install.sh` makes `source` search `$PATH`
+first, and a `mise` shim named `install.sh` (from a tool that happens
+to bundle its own `install.sh`) can shadow the real one.
 
 This does three things:
 
