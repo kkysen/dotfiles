@@ -80,6 +80,7 @@ mise_packages=(
     fd
     fzf
     gh
+    github:bvaisvil/zenith # crates.io: `zenith`
     github:dalance/procs # crates.io: `procs`
     github:ogham/exa # crates.io: `exa`
     # GitHub repo moved to `wild-linker/wild`; crates.io's `wild` is an

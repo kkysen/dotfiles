@@ -60,6 +60,7 @@ commands=(
     unzip
     uv
     wild
+    zenith
     zig
     zoxide
 )
