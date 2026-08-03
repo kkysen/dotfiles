@@ -38,15 +38,18 @@ commands=(
     "lld-$llvm_version"
     "lldb-$llvm_version"
     "llvm-config-$llvm_version"
+    ls
     lsd
     make
     mise
     mold
+    path
     pdfimages
     pdftotext
     procs
     python
     python3
+    rc
     rg
     ruplacer
     rustc
