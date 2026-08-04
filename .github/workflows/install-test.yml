@@ -1,8 +1,5 @@
-name: Install test
+name: Install Test
 
-# No path filtering yet: this is the initial version, so run on every
-# change until it's proven reliable, rather than risk silently skipping
-# a change that should have been tested.
 on:
   push:
     branches: [main]
@@ -16,7 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # `install.sh` refuses to run unless sourced, so this must stay `. ./install.sh`,
-      # not `./install.sh` or `bash install.sh`.
-      - name: Run install.sh
-        run: . ./install.sh
+      - run: . ./install.sh
