@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
 
 # Verifies every tool `scripts/bootstrap.sh` installs is actually on `$PATH`,
-# in login and non-login interactive shells (`~/.profile` -> `~/.bashrc`,
-# and `~/.bashrc` sourced directly, skipping `~/.profile`), plus a login
-# non-interactive shell, each simulated from a clean environment.
+# in login and non-login interactive and non-interactive shells:
+# * login, interactive: `~/.profile` -> `~/.bashrc`
+# * login, non-interactive: `~/.profile`
+# * non-login, interactive: `~/.bashrc`
 #
-# The fourth combination, non-login non-interactive (plain `bash -c`,
-# e.g. cron, `ssh host cmd`), is intentionally not checked: it sources
-# neither `~/.profile` nor `~/.bashrc` at all, by design, so nothing
-# installed by `mise`/`cargo`/`rustup`/Homebrew is ever reachable there
-# regardless of what this script installs. Only `$BASH_ENV` could change
-# that, and that has its own tradeoffs on every non-interactive invocation,
+# The fourth combination, non-login non-interactive
+# (plain `bash -c`, e.g. cron, `ssh host cmd`),
+# is intentionally not checked: it sources neither `~/.profile` nor `~/.bashrc` at all,
+# by design, so nothing installed by `mise`/`cargo`/`rustup`/`brew`
+# is ever reachable there regardless of what this script installs.
+# Only `$BASH_ENV` could change that, and that
+# has its own tradeoffs on every non-interactive invocation,
 # not something to take on just to make this combination pass.
 set -euo pipefail
 
 # `apt.llvm.org` packages are all suffixed with the same dev-branch major
-# version `scripts/bootstrap.sh` resolves dynamically, so resolve it the
-# same way here, rather than hardcoding one that'll go stale.
+# version `scripts/bootstrap.sh` resolves dynamically,
+# so resolve it the same way here, rather than hardcoding one that'll go stale.
 llvm_version="$(apt-cache search '^clang-[0-9]+$' | sed -E 's/^clang-([0-9]+).*/\1/' | sort -n | tail -1)"
 
 commands=(
