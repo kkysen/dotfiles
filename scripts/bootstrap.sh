@@ -104,6 +104,12 @@ set -x
 mise use -g "${mise_packages[@]}"
 set +x
 
+# `home/path.sh` normally puts `mise`'s shims dir on `$PATH` (see its comment
+# for why), but it isn't symlinked to `~/.path.sh` until `link.sh` runs, after
+# this script, and the rest of this script calls `mise`-installed tools
+# directly (`uv` below), so add it here too, same as `~/.local/bin` above.
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+
 # Latest Python, via `uv` (not `mise`, which only manages `uv` itself here).
 set -x
 uv python install --default --upgrade
