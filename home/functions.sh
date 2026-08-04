@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Functions
 #
 # `export -f` each one so it's usable in subshells, too
@@ -7,6 +8,7 @@
 # if exported explicitly.
 
 rc() {
+    # shellcheck source=home/bashrc.sh
     . ~/.bashrc
 }
 

@@ -8,6 +8,7 @@
 if [ "${BASH_SOURCE[0]}" = "$0" ]; then
     echo "Run this with '. ./install.sh', not './install.sh'," >&2
     echo "so it can update your current shell instead of a subprocess's." >&2
+    # shellcheck disable=SC2317 # not unreachable: `return` fails when this is run instead of sourced, falling through to `exit`.
     return 1 2>/dev/null || exit 1
 fi
 
@@ -30,4 +31,5 @@ if [ "$status" -ne 0 ]; then
     return 1
 fi
 
+# shellcheck source=home/bashrc.sh
 . ~/.bashrc

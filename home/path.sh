@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # `$PATH` / environment setup shared between `~/.profile` and `~/.bashrc`,
 # so each tool's setup lives in exactly one place even though both files need it.
 
@@ -19,6 +20,7 @@ export PATH="$HOME/.local/bin:$PATH"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # `rustup` / `cargo`
+# shellcheck source=/dev/null
 . ~/.cargo/env
 
 # `mise` shims: makes tools `mise` manages (`bun`, `uv`, `starship`, etc.)

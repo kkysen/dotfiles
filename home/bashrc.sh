@@ -1,8 +1,10 @@
+# shellcheck shell=bash
 # `~/.bashrc`: executed by `bash`(1) for non-login shells.
 
 # `home/functions.sh` exports its functions (`export -f`) specifically so
 # they're usable in non-interactive subshells and scripts too, not just here,
 # so source it before the interactive-only guard below, unlike everything after it.
+# shellcheck source=home/functions.sh
 . ~/.functions.sh
 
 # If not running interactively, don't do anything
@@ -23,7 +25,11 @@ shopt -s checkwinsize
 
 # Colored `grep`
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    if [ -r ~/.dircolors ]; then
+        eval "$(dircolors -b ~/.dircolors)"
+    else
+        eval "$(dircolors -b)"
+    fi
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -40,8 +46,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Programmable completion
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then
+        # shellcheck source=/dev/null
         . /usr/share/bash-completion/bash_completion
     elif [ -f /etc/bash_completion ]; then
+        # shellcheck source=/dev/null
         . /etc/bash_completion
     fi
 fi
@@ -61,6 +69,7 @@ fi
 # `~/.profile` sources `~/.path.sh` before sourcing this file,
 # but non-login shells (e.g. a new terminal tab, `tmux`) skip `~/.profile` entirely
 # and source this file directly, so re-source it here too. `mise` below needs it on `$PATH`.
+# shellcheck source=home/path.sh
 . "$HOME/.path.sh"
 
 # `mise` (runtime version manager: `node`, `npm`, ...; also manages `uv`, `bun`, `claude`).

@@ -89,6 +89,7 @@ check() {
     local label="$2"
     local cmd
     local not_found
+    # shellcheck disable=SC2016 # intentional: this expands inside the spawned `bash`, not here.
     not_found="$(env -i HOME="$HOME" TERM="${TERM:-dumb}" bash "$flag" '
         for cmd in "$@"; do
             command -v "$cmd" >/dev/null 2>&1 || echo "$cmd"
