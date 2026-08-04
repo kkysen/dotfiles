@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-# Verifies every tool `scripts/bootstrap.sh` installs is actually on `$PATH`,
+# Checks the syntax of every tracked `.sh` file (`bash -n`)
+# and lints them (`shellcheck`), the same as CI's `lint.yml`.
+# Then check that every tool `scripts/bootstrap.sh` installs is actually on `$PATH`,
 # in login and non-login interactive and non-interactive shells:
 # * login, interactive: `~/.profile` -> `~/.bashrc`
 # * login, non-interactive: `~/.profile`
@@ -15,6 +17,10 @@
 # has its own tradeoffs on every non-interactive invocation,
 # not something to take on just to make this combination pass.
 set -euo pipefail
+
+# Same checks as CI's `lint.yml`.
+git ls-files '*.sh' | xargs -n1 bash -n
+git ls-files '*.sh' | xargs shellcheck
 
 # `apt.llvm.org` packages are all suffixed with the same dev-branch major
 # version `scripts/bootstrap.sh` resolves dynamically,
