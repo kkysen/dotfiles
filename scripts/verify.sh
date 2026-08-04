@@ -66,6 +66,7 @@ commands=(
     rustup
     sccache
     sd
+    shellcheck
     socat
     starship
     tokei

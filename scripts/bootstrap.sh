@@ -94,6 +94,7 @@ mise_packages=(
     ripgrep
     sccache
     sd
+    shellcheck
     starship
     tokei
     uv
