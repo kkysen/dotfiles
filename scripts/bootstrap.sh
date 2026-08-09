@@ -64,6 +64,17 @@ fi
 # so add it to `PATH` here too.
 export PATH="$HOME/.local/bin:$PATH"
 
+# `mise` disabled `cargo-binstall`'s `quick-install` strategy by default in 2026.7.6,
+# since QuickInstall binaries are unsigned third-party builds,
+# not published by the crate maintainer.
+# Without it, crates with no binaries of their own on their GitHub releases
+# (e.g. `tokei`, below) always fall back to a full source compile.
+# Re-enable it: we're fine trusting QuickInstall.
+# This setting doesn't exist on `mise` versions older than 2026.7.6
+# (this script doesn't update an already-installed `mise`),
+# so tolerate that failing instead of aborting the whole script over it.
+mise settings set cargo.binstall_quickinstall true 2>/dev/null || true
+
 # Install via `mise`.
 # These are checksummed prebuilt binaries, not the more dangerous `curl | sh`.
 # Entries not in `mise`'s registry use its generic `github` backend instead
