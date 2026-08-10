@@ -110,6 +110,7 @@ mise_packages=(
     shellcheck
     starship
     tokei
+    typst
     usage
     uv
     yt-dlp

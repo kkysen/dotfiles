@@ -76,6 +76,7 @@ commands=(
     starship
     tokei
     tree
+    typst
     unzip
     usage
     uv
