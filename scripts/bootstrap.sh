@@ -84,6 +84,7 @@ mise_packages=(
     bat
     bun
     cargo-binstall
+    cargo:cargo-insta # `cargo-insta`/`aqua:mitsuhiko/insta` doesn't support linux/arm64
     ccache
     claude
     delta

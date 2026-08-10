@@ -31,6 +31,7 @@ commands=(
     bun
     cargo
     cargo-binstall
+    cargo-insta
     ccache
     "clang++-$llvm_version"
     "clang-$llvm_version"
