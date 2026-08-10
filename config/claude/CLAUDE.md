@@ -53,3 +53,10 @@ also keeps diffs minimal when a single variable is added, removed, or changed.
 
 When running commands to find/search things,
 use `rg` instead of `grep`, and `fd` instead of `find`.
+
+## Git
+
+Never run `git push` (or push a new branch/tag) unless the user
+explicitly asks for it in that specific instance, across all projects.
+Committing locally on request is fine; pushing is a separate, always-explicit step,
+even right after creating/pushing a repo earlier in the same session.
