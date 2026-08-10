@@ -99,6 +99,7 @@ mise_packages=(
     github:wild-linker/wild
     github:your-tools/ruplacer # crates.io: `ruplacer`
     gitui
+    hyperfine
     just
     lsd
     mold

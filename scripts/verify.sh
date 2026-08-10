@@ -47,6 +47,7 @@ commands=(
     gcc
     gh
     gitui
+    hyperfine
     just
     "lld-$llvm_version"
     "lldb-$llvm_version"
