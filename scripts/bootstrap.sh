@@ -102,6 +102,7 @@ mise_packages=(
     just
     lsd
     mold
+    pre-commit
     ripgrep
     sccache
     sd
@@ -121,6 +122,13 @@ set +x
 # this script, and the rest of this script calls `mise`-installed tools
 # directly (`uv` below), so add it here too, same as `~/.local/bin` above.
 export PATH="$HOME/.local/share/mise/shims:$PATH"
+
+# Wire up `.pre-commit-config.yaml`'s git hook for this checkout.
+# Idempotent, so safe to re-run on every `bootstrap.sh` invocation.
+set -x
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+(cd "$DOTFILES_DIR" && pre-commit install)
+set +x
 
 # Latest Python, via `uv` (not `mise`, which only manages `uv` itself here).
 set -x

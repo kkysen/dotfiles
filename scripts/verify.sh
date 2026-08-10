@@ -59,6 +59,7 @@ commands=(
     path
     pdfimages
     pdftotext
+    pre-commit
     procs
     python
     python3
