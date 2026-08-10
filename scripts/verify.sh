@@ -65,6 +65,7 @@ commands=(
     python
     python3
     rc
+    rclone
     rg
     ruplacer
     rustc

@@ -104,6 +104,7 @@ mise_packages=(
     lsd
     mold
     pre-commit
+    rclone
     ripgrep
     sccache
     sd
