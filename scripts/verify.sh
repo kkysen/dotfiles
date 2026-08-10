@@ -57,6 +57,7 @@ commands=(
     make
     mise
     mold
+    ninja
     path
     pdfimages
     pdftotext

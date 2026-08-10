@@ -103,6 +103,7 @@ mise_packages=(
     just
     lsd
     mold
+    ninja
     pre-commit
     rclone
     ripgrep
