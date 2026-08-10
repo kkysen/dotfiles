@@ -87,6 +87,7 @@ mise_packages=(
     ccache
     claude
     delta
+    deno
     dua
     fd
     fzf

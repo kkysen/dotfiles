@@ -39,6 +39,7 @@ commands=(
     "clang-tidy-$llvm_version"
     claude
     delta
+    deno
     dua
     exa
     fd
