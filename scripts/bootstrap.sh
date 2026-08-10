@@ -100,6 +100,7 @@ mise_packages=(
     github:your-tools/ruplacer # crates.io: `ruplacer`
     gitui
     hyperfine
+    jj
     just
     lsd
     mold
