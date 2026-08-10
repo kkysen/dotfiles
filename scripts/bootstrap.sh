@@ -109,6 +109,8 @@ mise_packages=(
     lsd
     mold
     ninja
+    node
+    npm
     pre-commit
     rclone
     ripgrep

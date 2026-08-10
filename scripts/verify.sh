@@ -63,6 +63,8 @@ commands=(
     mise
     mold
     ninja
+    node
+    npm
     path
     pdfimages
     pdftotext
