@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+# shellcheck shell=sh
 # `$PATH` / environment setup shared between `~/.profile` and `~/.bashrc`,
 # so each tool's setup lives in exactly one place even though both files need it.
 
