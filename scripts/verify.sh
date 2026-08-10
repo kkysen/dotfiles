@@ -49,6 +49,7 @@ commands=(
     gitui
     hyperfine
     jj
+    jq
     just
     "lld-$llvm_version"
     "lldb-$llvm_version"

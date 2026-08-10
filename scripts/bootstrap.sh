@@ -101,6 +101,7 @@ mise_packages=(
     gitui
     hyperfine
     jj
+    jq
     just
     lsd
     mold
