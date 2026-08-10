@@ -80,6 +80,7 @@ commands=(
     usage
     uv
     wild
+    yt-dlp
     zenith
     zig
     zoxide

@@ -112,6 +112,7 @@ mise_packages=(
     tokei
     usage
     uv
+    yt-dlp
     zig
     zoxide
 )
