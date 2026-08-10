@@ -91,6 +91,7 @@ mise_packages=(
     deno
     dua
     fd
+    ffmpeg
     fzf
     gh
     github:bvaisvil/zenith # crates.io: `zenith`

@@ -44,6 +44,7 @@ commands=(
     dua
     exa
     fd
+    ffmpeg
     fzf
     g++
     gcc
