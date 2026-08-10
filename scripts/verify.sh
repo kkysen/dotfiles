@@ -76,6 +76,7 @@ commands=(
     tokei
     tree
     unzip
+    usage
     uv
     wild
     zenith

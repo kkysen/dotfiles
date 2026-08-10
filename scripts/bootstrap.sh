@@ -109,6 +109,7 @@ mise_packages=(
     shellcheck
     starship
     tokei
+    usage
     uv
     zig
     zoxide
