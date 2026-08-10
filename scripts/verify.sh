@@ -118,5 +118,5 @@ fi
 echo "All commands found in every checked shell."
 
 # Same checks as CI's `lint.yml`.
-git ls-files '*.sh' | xargs -n1 bash -n
-git ls-files '*.sh' | xargs shellcheck
+git ls-files -z '*.sh' | xargs -0 -n1 bash -n
+git ls-files -z '*.sh' | xargs -0 shellcheck
