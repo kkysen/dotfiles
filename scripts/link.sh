@@ -39,6 +39,15 @@ link() {
 link home/path.sh .path.sh
 link home/functions.sh .functions.sh
 link home/profile.sh .profile
+# `bash` reads only the first one of
+# * `~/.bash_profile`
+# * `~/.bash_login`
+# * `~/.profile`
+# that exists, so link the same file to all three.
+# Otherwise a pre-existing (even empty) one of these silently shadows the others
+# and none of its setup ever runs.
+link home/profile.sh .bash_profile
+link home/profile.sh .bash_login
 link home/bashrc.sh .bashrc
 link home/gitconfig .gitconfig
 link config/claude/settings.json .claude/settings.json
