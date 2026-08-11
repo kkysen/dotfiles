@@ -52,6 +52,7 @@ link home/bashrc.sh .bashrc
 link home/gitconfig .gitconfig
 link config/claude/settings.json .claude/settings.json
 link config/claude/CLAUDE.md .claude/CLAUDE.md
+link config/claude/statusline-command.sh .claude/statusline-command.sh
 link config/starship.toml .config/starship.toml
 link config/atuin/config.toml .config/atuin/config.toml
 

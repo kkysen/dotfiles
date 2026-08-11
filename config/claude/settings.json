@@ -35,5 +35,9 @@
       }
     ]
   },
+  "statusLine": {
+    "command": "$HOME/.claude/statusline-command.sh",
+    "type": "command"
+  },
   "theme": "auto"
 }
