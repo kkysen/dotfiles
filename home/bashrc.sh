@@ -81,15 +81,20 @@ eval "$(zoxide init bash)"
 # `fzf`
 eval "$(fzf --bash)"
 
-# `starship` prompt (overrides the fallback `PS1` above)
-eval "$(starship init bash)"
-
 # `atuin` (shell history search/sync)
 # `--disable-up-arrow` because Ctrl + R already does the same,
 # and overriding the up arrow gets in the way of a lot of quick uses.
 # `--disable-ai` so that typing `?` doesn't launch AI
 # while I'm trying to type something else.
+# Sourced before `starship` below: it's what pulls in `bash-preexec`.
+# `starship init bash` only registers itself through `precmd_functions`/`preexec_functions`
+# if `bash-preexec` is already loaded when it runs;
+# otherwise it silently folds other tools' hooks into a hidden
+# `$STARSHIP_PROMPT_COMMAND` string it `eval`s instead.
 eval "$(atuin init bash --disable-up-arrow --disable-ai)"
+
+# `starship` prompt (overrides the fallback `PS1` above)
+eval "$(starship init bash)"
 
 # Completions
 eval "$(bat --completion bash)"
