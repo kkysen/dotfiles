@@ -59,6 +59,7 @@ commands=(
     "llvm-config-$llvm_version"
     ls
     lsd
+    magick
     make
     mise
     mold

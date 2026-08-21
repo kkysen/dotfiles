@@ -104,6 +104,7 @@ mise_packages=(
     github:your-tools/ruplacer # crates.io: `ruplacer`
     gitui
     hyperfine
+    imagemagick
     jj
     jq
     just
