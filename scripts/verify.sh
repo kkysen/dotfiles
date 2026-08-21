@@ -90,6 +90,7 @@ commands=(
     usage
     uv
     wild
+    xdg-open
     yt-dlp
     zenith
     zig

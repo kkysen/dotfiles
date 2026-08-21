@@ -42,6 +42,7 @@ apt_packages=(
     socat # for `claude`'s sandbox
     tree
     unzip
+    xdg-utils
 )
 for package in "${apt_packages[@]}"; do
     if ! is_apt_package_installed "$package"; then
