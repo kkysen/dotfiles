@@ -1,5 +1,14 @@
 # Global instructions
 
+## Claude Attribution
+
+You must attribute every commit you make to yourself,
+no matter how the commit was made, whether through
+`git commit -m`, `git commit -F`, or any other way.
+You must use a `Co-authored-by:` line at the bottom of each commit.
+Note that `Co-authored-by:` is lowercase.
+No need for any `Claude-Session:`.
+
 ## Prose formatting
 
 Apply this to all prose you write that is monospace and not line-wrapped,
