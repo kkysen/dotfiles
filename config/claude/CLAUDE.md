@@ -67,5 +67,6 @@ use `rg` instead of `grep`, and `fd` instead of `find`.
 
 Never run `git push` (or push a new branch/tag) unless the user
 explicitly asks for it in that specific instance, across all projects.
-Committing locally on request is fine; pushing is a separate, always-explicit step,
+Committing locally is fine (unless requested not to);
+pushing is a separate, always-explicit step,
 even right after creating/pushing a repo earlier in the same session.
