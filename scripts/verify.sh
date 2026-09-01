@@ -48,6 +48,7 @@ commands=(
     fzf
     g++
     gcc
+    gcloud
     gh
     gitui
     hyperfine

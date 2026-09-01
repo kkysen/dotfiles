@@ -94,6 +94,7 @@ mise_packages=(
     fd
     ffmpeg
     fzf
+    gcloud
     gh
     github:bvaisvil/zenith # crates.io: `zenith`
     github:dalance/procs # crates.io: `procs`
