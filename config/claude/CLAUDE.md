@@ -70,3 +70,5 @@ explicitly asks for it in that specific instance, across all projects.
 Committing locally is fine (unless requested not to);
 pushing is a separate, always-explicit step,
 even right after creating/pushing a repo earlier in the same session.
+
+Split changes into one commit per separate change.
