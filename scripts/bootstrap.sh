@@ -35,6 +35,7 @@ apt_packages=(
     "clang-format-$llvm_version"
     "clang-tidy-$llvm_version"
     "clang-tools-$llvm_version"
+    gdb
     # `openssl-sys`, which a lot of crates pull in transitively
     # (anything on `git2`/`libgit2-sys`, `reqwest`, ...), locates OpenSSL
     # only via `pkg-config`, and needs the headers, not just the runtime.

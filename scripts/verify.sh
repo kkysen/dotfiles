@@ -49,6 +49,7 @@ commands=(
     g++
     gcc
     gcloud
+    gdb
     gh
     gitui
     hyperfine
