@@ -8,6 +8,7 @@ no matter how the commit was made, whether through
 You must use a `Co-authored-by:` line at the bottom of each commit.
 Note that `Co-authored-by:` is lowercase.
 No need for any `Claude-Session:`.
+Include the model name like you usually do.
 
 ## Prose formatting
 
