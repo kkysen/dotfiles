@@ -35,9 +35,16 @@ apt_packages=(
     "clang-format-$llvm_version"
     "clang-tidy-$llvm_version"
     "clang-tools-$llvm_version"
+    # `openssl-sys`, which a lot of crates pull in transitively
+    # (anything on `git2`/`libgit2-sys`, `reqwest`, ...), locates OpenSSL
+    # only via `pkg-config`, and needs the headers, not just the runtime.
+    # Without both, a `cargo install`/`cargo binstall` source build
+    # fails at the `-sys` crate's build script rather than at compile time.
+    libssl-dev
     "lld-$llvm_version"
     "lldb-$llvm_version"
     "llvm-$llvm_version"
+    pkg-config
     poppler-utils
     socat # for `claude`'s sandbox
     tree

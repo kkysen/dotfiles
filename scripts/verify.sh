@@ -70,6 +70,7 @@ commands=(
     path
     pdfimages
     pdftotext
+    pkg-config
     pre-commit
     procs
     python
