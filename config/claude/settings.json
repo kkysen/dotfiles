@@ -76,5 +76,6 @@
       "**Trusted repo**: `/home/khyber/work/mta-od-data` (working directory) and its remote `origin` (`https://github.com/kkysen/mta-od-data.git`), a public repo — only this repo's own work should be pushed there; content ported or first read from outside this session's repo is not its own work",
       "**Org-specific CLIs**: None configured"
     ]
-  }
+  },
+  "remoteControlAtStartup": true
 }
