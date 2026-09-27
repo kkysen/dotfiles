@@ -228,3 +228,16 @@ if [ -z "${CI:-}" ]; then
     atuin hook install codex
     set +x
 fi
+
+# Install via `gh extension install`, for `gh` subcommands shipped as extensions.
+# `owner/repo` of each extension's GitHub repo (`gh-<name>`).
+gh_extensions=(
+    github/gh-stack # `gh stack`
+)
+for extension in "${gh_extensions[@]}"; do
+    if ! gh extension list | cut -f2 | grep -qxF "$extension"; then
+        set -x
+        gh extension install "$extension"
+        set +x
+    fi
+done
