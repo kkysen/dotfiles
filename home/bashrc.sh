@@ -65,6 +65,9 @@ fi
 export WIN_HOME=/mnt/c/Users/kkyse
 export DOWNLOADS="$WIN_HOME/Downloads"
 
+export ONE_DRIVE="$WIN_HOME/OneDrive"
+export ONE_HOME="$ONE_DRIVE/Khyber"
+
 # --- Tool hooks ---
 # These assume `scripts/bootstrap.sh` has already installed everything.
 # A missing tool here is a hard error on purpose, not a silent skip.
