@@ -62,6 +62,9 @@ if [ -n "${WSL_DISTRO_NAME:-}" ]; then
     export BROWSER='cmd.exe /c start chrome'
 fi
 
+export WIN_HOME=/mnt/c/Users/kkyse
+export DOWNLOADS="$WIN_HOME/Downloads"
+
 # --- Tool hooks ---
 # These assume `scripts/bootstrap.sh` has already installed everything.
 # A missing tool here is a hard error on purpose, not a silent skip.
