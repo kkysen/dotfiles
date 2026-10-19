@@ -23,6 +23,15 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # shellcheck source=/dev/null
 . ~/.cargo/env
 
+# LLVM: `apt.llvm.org` installs only version-suffixed names (`clang-24`) into `/usr/bin`,
+# so several versions can coexist; the unversioned ones (`clang`, `ld.lld`, `llvm-ar`, ...)
+# are in `/usr/lib/llvm-<version>/bin`. Put the newest version's on `$PATH`.
+llvm_bin="$(printf '%s\n' /usr/lib/llvm-*/bin | sort -V | tail -n 1)"
+if [ -d "$llvm_bin" ]; then
+    export PATH="$llvm_bin:$PATH"
+fi
+unset llvm_bin
+
 # `mise` shims: makes tools `mise` manages (`bun`, `uv`, `starship`, etc.)
 # available immediately, without needing an interactive prompt
 # to trigger `mise activate`'s lazy `$PATH` hook.
