@@ -56,6 +56,19 @@ link config/claude/statusline-command.sh .claude/statusline-command.sh
 link config/starship.toml .config/starship.toml
 link config/atuin/config.toml .config/atuin/config.toml
 
+# `ccache` masquerade symlinks (see `home/path.sh`).
+# They must point at the real `ccache` binary, not its `mise` shim,
+# since a shim dispatches on its own name, which here is the compiler's.
+# `mise which` resolves through `latest`, so this survives `ccache` upgrades.
+ccache_dir="$HOME/.local/lib/ccache"
+ccache_bin="$(mise which ccache)"
+mkdir -p "$ccache_dir"
+for compiler in cc c++ gcc g++ clang clang++; do
+    if [ "$(readlink "$ccache_dir/$compiler" 2>/dev/null)" != "$ccache_bin" ]; then
+        echo_and_run ln -sfn "$ccache_bin" "$ccache_dir/$compiler"
+    fi
+done
+
 if [ -d "$BACKUP_DIR" ]; then
     echo
     echo "Pre-existing files backed up under $BACKUP_DIR"

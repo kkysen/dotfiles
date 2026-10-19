@@ -32,6 +32,12 @@ if [ -d "$llvm_bin" ]; then
 fi
 unset llvm_bin
 
+# `ccache` in front of the C/C++ compilers, via `ccache`'s masquerade mode:
+# `scripts/link.sh` makes symlinks named `clang`, `cc`, ... to the real `ccache` here,
+# which then runs the next compiler of that name on `$PATH` (e.g. LLVM's above) and caches it.
+# Must come before the LLVM directory on `$PATH`, so after it here.
+export PATH="$HOME/.local/lib/ccache:$PATH"
+
 # `mise` shims: makes tools `mise` manages (`bun`, `uv`, `starship`, etc.)
 # available immediately, without needing an interactive prompt
 # to trigger `mise activate`'s lazy `$PATH` hook.
