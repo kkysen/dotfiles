@@ -63,7 +63,16 @@ link config/atuin/config.toml .config/atuin/config.toml
 ccache_dir="$HOME/.local/lib/ccache"
 ccache_bin="$(mise which ccache)"
 mkdir -p "$ccache_dir"
-for compiler in cc c++ gcc g++ clang clang++; do
+# Besides the plain names, also the versioned (`gcc-15`, `clang-24`)
+# and target-prefixed (`aarch64-linux-gnu-gcc`) ones that are installed.
+# `c89` and `c99` don't need one: they're scripts that run `gcc` from `$PATH`.
+compilers=(cc c++ gcc g++ clang clang++)
+for path in /usr/bin/{gcc,g++,clang,clang++}-[0-9]* /usr/bin/*-linux-gnu-{gcc,g++} /usr/bin/*-linux-gnu-{gcc,g++}-[0-9]*; do
+    if [ -x "$path" ]; then
+        compilers+=("$(basename "$path")")
+    fi
+done
+for compiler in "${compilers[@]}"; do
     if [ "$(readlink "$ccache_dir/$compiler" 2>/dev/null)" != "$ccache_bin" ]; then
         echo_and_run ln -sfn "$ccache_bin" "$ccache_dir/$compiler"
     fi
