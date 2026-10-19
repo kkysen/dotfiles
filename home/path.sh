@@ -3,13 +3,9 @@
 # so each tool's setup lives in exactly one place even though both files need it.
 
 # Both files source this, and this itself gets re-sourced on every `. ~/.bashrc`
-# or new non-login shell, but none of the exports below check whether they're
-# already on `$PATH` before prepending again, so re-sourcing without this guard
-# duplicates every entry once per re-source.
-if [ -n "${__DOTFILES_PATH_SH_SOURCED:-}" ]; then
-    return
-fi
-export __DOTFILES_PATH_SH_SOURCED=1
+# or new non-login shell. It always re-runs in full, so changes to it take effect
+# on re-source, and the duplicate `$PATH` entries that re-prepending creates
+# are removed at the end.
 
 # Do this in reverse order of `$PATH` order.
 
@@ -19,9 +15,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# `rustup` / `cargo`
-# shellcheck source=/dev/null
-. ~/.cargo/env
+# `rustup` / `cargo`: what `~/.cargo/env` does, except that it skips prepending
+# when already on `$PATH`, which would leave it out of order on a re-source.
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # LLVM: `apt.llvm.org` installs only version-suffixed names (`clang-24`) into `/usr/bin`,
 # so several versions can coexist; the unversioned ones (`clang`, `ld.lld`, `llvm-ar`, ...)
@@ -45,3 +41,9 @@ export PATH="$HOME/.local/lib/ccache:$PATH"
 # since `mise activate` "doesn't work well for non-interactive situations like scripts":
 # <https://mise.jdx.dev/dev-tools/shims.html>
 export PATH="$HOME/.local/share/mise/shims:$PATH"
+
+# Remove duplicate `$PATH` entries, keeping each one's first occurrence.
+# Everything above prepends, so on a re-source the fresh entries come first
+# and this leaves `$PATH` in the same order as a first source.
+PATH="$(printf '%s' "$PATH" | awk -v RS=: -v ORS=: '!seen[$0]++' | sed 's/:$//')"
+export PATH
