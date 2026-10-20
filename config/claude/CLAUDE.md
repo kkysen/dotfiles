@@ -10,6 +10,12 @@ Note that `Co-authored-by:` is lowercase.
 No need for any `Claude-Session:`.
 Include the model name like you usually do.
 
+## Questions come first
+
+When the user asks a question, especially a follow-up in the middle of work, answer it first and fully,
+before any more tool calls for ongoing work. Work they already asked for can continue afterwards
+(in the background if it helps), but never let it delay or replace the answer.
+
 ## Prose formatting
 
 Apply this to all prose you write that is monospace and not line-wrapped,
@@ -73,3 +79,12 @@ pushing is a separate, always-explicit step,
 even right after creating/pushing a repo earlier in the same session.
 
 Split changes into one commit per separate change.
+
+## Temporary files
+
+Never write anything big (pickles, simulation outputs, logs of full runs, build artifacts)
+to `/tmp` or the session scratchpad: on this WSL machine `/tmp` is tmpfs, backed by RAM,
+so large files there eat the memory WSL itself needs.
+Filling it once crashed the whole WSL service and every terminal.
+Put large outputs on disk instead, e.g. a gitignored directory in the repo like `target/` or `.cache/`.
+Also avoid accumulating huge results in memory; stream them or keep only what's needed.
