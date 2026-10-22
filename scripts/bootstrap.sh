@@ -36,6 +36,9 @@ apt_packages=(
     "clang-tidy-$llvm_version"
     "clang-tools-$llvm_version"
     gdb
+    # Playwright's Chromium builds (and headless shell) link it even headless;
+    # it's the one shared library they need that nothing else here pulls in.
+    libasound2t64
     # `openssl-sys`, which a lot of crates pull in transitively
     # (anything on `git2`/`libgit2-sys`, `reqwest`, ...), locates OpenSSL
     # only via `pkg-config`, and needs the headers, not just the runtime.
