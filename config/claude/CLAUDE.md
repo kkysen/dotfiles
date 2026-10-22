@@ -33,6 +33,12 @@ in every project—commit messages, markdown files, code comments—not just com
 - When you do use an em dash, don't put spaces around it: `word—word`, not `word — word`.
 - Shell/env variables get their sigil in prose too: `` `$PATH` ``, not `` `PATH` ``.
 
+PR descriptions (and issue/PR comments) are the exception to semantic line breaks:
+they aren't monospaced, and GitHub renders every newline, so don't break lines within a paragraph there.
+Write each paragraph or list item as one line, separated by blank lines,
+the same way `gh pr create --fill` joins a commit body's lines.
+The backtick and em dash rules still apply.
+
 This has been missed repeatedly specifically on commit messages,
 including right after drafting one correctly moments earlier for a different message.
 Before running `git commit`, re-read the exact message being passed and check it
