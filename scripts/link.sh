@@ -55,6 +55,15 @@ link config/claude/CLAUDE.md .claude/CLAUDE.md
 link config/claude/statusline-command.sh .claude/statusline-command.sh
 link config/starship.toml .config/starship.toml
 link config/atuin/config.toml .config/atuin/config.toml
+link config/systemd/user/rclone-gdrive.service .config/systemd/user/rclone-gdrive.service
+
+# Start the Google Drive mount at login.
+# Skipped where there's no systemd user instance (e.g. WSL without `systemd=true`).
+if systemctl --user daemon-reload 2>/dev/null; then
+    if ! systemctl --user is-enabled --quiet rclone-gdrive.service; then
+        echo_and_run systemctl --user enable --now rclone-gdrive.service
+    fi
+fi
 
 # `ccache` masquerade symlinks (see `home/path.sh`).
 # They must point at the real `ccache` binary, not its `mise` shim,

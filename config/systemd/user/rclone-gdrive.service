@@ -1,0 +1,21 @@
+# Mounts Google Drive at `~/gdrive` with `rclone`, from login until shutdown.
+# Needs a `gdrive` remote in `~/.config/rclone/rclone.conf`, made once per machine
+# with `rclone config`. That file holds the OAuth token, so it isn't tracked here.
+# Until it exists, `ExecCondition` skips the mount instead of failing.
+[Unit]
+Description=Mount Google Drive at ~/gdrive with rclone
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=notify
+ExecCondition=/usr/bin/grep -qxF [gdrive] %h/.config/rclone/rclone.conf
+ExecStartPre=/usr/bin/mkdir -p %h/gdrive
+# The `mise` shim, not a versioned path, so this survives `rclone` upgrades.
+ExecStart=%h/.local/share/mise/shims/rclone mount gdrive: %h/gdrive --vfs-cache-mode writes
+ExecStop=/usr/bin/fusermount3 -u %h/gdrive
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=default.target
