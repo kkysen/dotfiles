@@ -57,11 +57,21 @@ link config/starship.toml .config/starship.toml
 link config/atuin/config.toml .config/atuin/config.toml
 link config/systemd/user/rclone-gdrive.service .config/systemd/user/rclone-gdrive.service
 
+# Make the `gdrive` remote the mount needs, which opens a browser to log into Google.
+# Only from a terminal, so CI and other non-interactive runs skip it.
+if [ -t 0 ] && ! rclone listremotes | grep -qxF gdrive:; then
+    echo_and_run rclone config create gdrive drive scope=drive
+fi
+
 # Start the Google Drive mount at login.
 # Skipped where there's no systemd user instance (e.g. WSL without `systemd=true`).
 if systemctl --user daemon-reload 2>/dev/null; then
     if ! systemctl --user is-enabled --quiet rclone-gdrive.service; then
-        echo_and_run systemctl --user enable --now rclone-gdrive.service
+        echo_and_run systemctl --user enable rclone-gdrive.service
+    fi
+    # Also (re)tries it after an earlier run skipped it for having no `gdrive` remote yet.
+    if ! systemctl --user is-active --quiet rclone-gdrive.service; then
+        echo_and_run systemctl --user start rclone-gdrive.service
     fi
 fi
 
