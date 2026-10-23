@@ -22,6 +22,12 @@ fi
 
     set -x
     ./scripts/bootstrap.sh
+    set +x
+    # Put what `bootstrap.sh` just installed on `$PATH` for the scripts below,
+    # straight from the repo, since `link.sh` hasn't linked it to `~/.path.sh` yet.
+    # shellcheck source=home/path.sh
+    . ./home/path.sh
+    set -x
     ./scripts/link.sh
     ./scripts/verify.sh
     set +x
