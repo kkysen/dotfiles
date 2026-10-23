@@ -57,11 +57,19 @@ link config/starship.toml .config/starship.toml
 link config/atuin/config.toml .config/atuin/config.toml
 link config/systemd/user/rclone-gdrive.service .config/systemd/user/rclone-gdrive.service
 
-# Make the `gdrive` remote the mount needs, which opens a browser to log into Google.
+# Make an `rclone` remote if it doesn't exist yet, which opens a browser to log in.
 # Only from a terminal, so CI and other non-interactive runs skip it.
-if [ -t 0 ] && ! rclone listremotes | grep -qxF gdrive:; then
-    echo_and_run rclone config create gdrive drive scope=drive
-fi
+rclone_remote() {
+    local name="$1"
+    if [ -t 0 ] && ! rclone listremotes | grep -qxF "$name:"; then
+        echo_and_run rclone config create "$@"
+    fi
+}
+
+# Google Drive, which the mount below needs.
+rclone_remote gdrive drive scope=drive
+# OneDrive. Not mounted, since the Windows OneDrive app already syncs it to `C:\Users\<user>\OneDrive`.
+rclone_remote onedrive onedrive
 
 # Start the Google Drive mount at login.
 # Skipped where there's no systemd user instance (e.g. WSL without `systemd=true`).
