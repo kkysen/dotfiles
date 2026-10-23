@@ -45,6 +45,7 @@ commands=(
     exa
     fd
     ffmpeg
+    fusermount3
     fzf
     g++
     gcc

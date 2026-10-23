@@ -35,6 +35,7 @@ apt_packages=(
     "clang-format-$llvm_version"
     "clang-tidy-$llvm_version"
     "clang-tools-$llvm_version"
+    fuse3 # `fusermount3`, for `rclone mount`
     gdb
     # Playwright's Chromium builds (and headless shell) link it even headless;
     # it's the one shared library they need that nothing else here pulls in.
