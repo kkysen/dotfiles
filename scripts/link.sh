@@ -56,6 +56,7 @@ link config/claude/statusline-command.sh .claude/statusline-command.sh
 link config/starship.toml .config/starship.toml
 link config/atuin/config.toml .config/atuin/config.toml
 link config/systemd/user/rclone-gdrive.service .config/systemd/user/rclone-gdrive.service
+link config/systemd/user/claude.slice .config/systemd/user/claude.slice
 
 # Make an `rclone` remote if it doesn't exist yet, which opens a browser to log in.
 # Only from a terminal, so CI and other non-interactive runs skip it.

@@ -1,0 +1,5 @@
+# Shared memory budget for Claude Code and everything it starts (see `claude()` in `home/functions.sh`).
+# One cap for all of them together, so parallel jobs and agents can't add up past it.
+[Slice]
+MemoryMax=8G
+MemorySwapMax=1G

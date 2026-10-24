@@ -25,3 +25,12 @@ ls() {
 }
 
 export -f ls
+
+# Run Claude Code, and everything it starts, inside `claude.slice`,
+# so they all share one memory cap (`~/.config/systemd/user/claude.slice`)
+# and the kernel kills the biggest job instead of WSL running out of memory.
+claude() {
+    systemd-run --user --scope --quiet --collect --slice=claude.slice claude "$@"
+}
+
+export -f claude
