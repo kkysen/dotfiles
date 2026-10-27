@@ -52,6 +52,10 @@ apt_packages=(
     pkg-config
     poppler-utils
     socat # for `claude`'s sandbox
+    # `claude`'s `/voice` records through SoX (`rec`), and in WSL2
+    # it needs SoX's PulseAudio backend to reach WSLg's audio server.
+    sox
+    libsox-fmt-pulse
     tree
     unzip
     xdg-utils
